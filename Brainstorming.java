@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,7 +48,7 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class Brainstorming extends JFrame implements ActionListener {
 	static Brainstorming w = new Brainstorming();
-	final String version = "Ver 2.1.4";
+	final String version = "Ver 2.1.5";
 	int diffX, diffY;
 	int allNum = 0;
 	int row = 0, col = 0;
@@ -86,7 +88,12 @@ public class Brainstorming extends JFrame implements ActionListener {
 			SwingUtilities.updateComponentTreeUI(this);
 		} catch (Exception e) {
 		}
-		newIdea();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				newIdea();
+			}
+		});
 	}
 
 	void newIdea() {
